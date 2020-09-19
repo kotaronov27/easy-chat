@@ -32,13 +32,13 @@ function EasyChat() {
 
   // TODO : 08. firestoreから読み込み
   // TODO : 10. リアルタイムアップデートを拾うようにしたら不要
-  // this.loadMessages();
+  this.loadMessages();
 }
 
 // Sets up Firebase features.
 EasyChat.prototype.initFirebase = function() {
   // TODO : 08. firestoreから読み込み
-  // this.firestore = firebase.firestore();
+  this.firestore = firebase.firestore();
 
   // TODO : 10. Add realtime update listener
   // var that = this;
@@ -60,14 +60,14 @@ EasyChat.prototype.initFirebase = function() {
 // Loads chat messages history and listens for upcoming ones.
 EasyChat.prototype.loadMessages = function() {
   // TODO : 08. firestoreから読み込み
-  // this.firestore.collection('messages')
-  //   .orderBy('timestamp')
-  //   .get()
-  //   .then((querySnapshot) => {
-  //     querySnapshot.forEach((doc) => {
-  //       this.displayMessage(doc.id, doc.data().name, doc.data().message, 'images/profile_placeholder.png')
-  //   });
-  // })
+  this.firestore.collection('messages')
+    .orderBy('timestamp')
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.displayMessage(doc.id, doc.data().name, doc.data().message, 'images/profile_placeholder.png')
+    });
+  })
 
   // TODO : 12. 認証後のユーザー画像追加
   // this.firestore.collection('messages')
@@ -84,10 +84,10 @@ EasyChat.prototype.loadMessages = function() {
 EasyChat.prototype.saveMessage = function(e) {
   e.preventDefault();
   // TODO : 06. 送信時処理を追加
-  // if (this.messageInput.value) {
-  //   var date = new Date();
-  //   this.displayMessage(date.getTime(), 'User Name', this.messageInput.value, 'images/profile_placeholder.png');
-  // }
+  if (this.messageInput.value) {
+    var date = new Date();
+    this.displayMessage(date.getTime(), 'User Name', this.messageInput.value, 'images/profile_placeholder.png');
+  }
 
   // TODO : 09. 送信時のFirestore保存処理を追加
   // if (this.messageInput.value) {
